@@ -51,4 +51,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- my own
+vim.keymap.set({ 'c', 'i' }, 'jj', '<Esc>', { desc = 'Enter normal mode' })
+vim.keymap.set('n', ';', ':', { desc = 'Enter command-line mode' })
+vim.keymap.set('n', '<C-;>', ';', { desc = 'Repeat last f, F, t or T' })
+vim.keymap.set('n', ',', '"+', { desc = 'Using the system clipboard…' })
+if vim.g.neovide then
+  local on_macos = vim.fn.has 'macunix' == 1
+  local key = on_macos and '<D-,>' or '<C-,>' -- Command-, on macOS and Ctrl+, elsewhere
+  local on_windows = vim.fn.has 'win32' == 1
+  local dir = on_windows and '/AppData/Roaming' or on_macos and '/Library/Application Support' or '/.config'
+  local path = vim.env.HOME .. dir .. '/neovide/config.toml'
+  vim.keymap.set({ 'n', 'i' }, key, ':e ' .. path .. '<Enter>', { desc = 'Open the Neovide config file' })
+end
+
 -- vim: ts=2 sts=2 sw=2 et
