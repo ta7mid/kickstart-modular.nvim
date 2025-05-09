@@ -7,19 +7,18 @@ return {
     'zbirenbaum/copilot.lua',
     opts = {
       suggestion = {
-        enabled = not vim.g.ai_cmp,
         auto_trigger = true,
-        hide_during_completion = vim.g.ai_cmp,
         keymap = {
           accept = '<M-CR>',
-          next = '<M-]>',
-          prev = '<M-[>',
+          accept_word = '<M-w>',
+          accept_line = '<M-l>',
         },
       },
-      panel = { enabled = false },
       filetypes = {
+        yaml = true,
         markdown = true,
         help = true,
+        gitcommit = true,
       },
     },
   },
