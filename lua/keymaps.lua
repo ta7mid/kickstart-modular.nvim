@@ -57,11 +57,10 @@ vim.keymap.set('n', ';', ':', { desc = 'Enter command-line mode' })
 vim.keymap.set('n', '<C-;>', ';', { desc = 'Repeat last f, F, t or T' })
 vim.keymap.set('n', ',', '"+', { desc = 'Using the system clipboard…' })
 if vim.g.neovide then
-  local on_macos = vim.fn.has 'macunix' == 1
-  local key = on_macos and '<D-,>' or '<C-,>' -- Command-, on macOS and Ctrl+, elsewhere
-  local on_windows = vim.fn.has 'win32' == 1
-  local dir = on_windows and '/AppData/Roaming' or on_macos and '/Library/Application Support' or '/.config'
-  local path = vim.env.HOME .. dir .. '/neovide/config.toml'
+  -- command-comma on macOS and ctrl-comma elsewhere
+  local key = vim.fn.has 'macunix' == 1 and '<D-,>' or '<C-,>'
+  local dir = vim.fn.has 'win32' == 1 and vim.env.AppData or '~/.config'
+  local path = dir .. '/neovide/config.toml'
   vim.keymap.set({ 'n', 'i' }, key, ':e ' .. path .. '<Enter>', { desc = 'Open the Neovide config file' })
 end
 
